@@ -29,9 +29,10 @@ Use the `v2sing` tool by providing specific parameters. Below are the currently 
 
 Versioned templates are in the [templates directory](./src/config/templates/), with filenames indicating the target sing-box version.
 
-| sing-box version | Status  | Template                                                   |
-|------------------|---------|------------------------------------------------------------|
-| 1.13             | Default | [View template](./src/config/templates/sing-box-1.13.json) |
+| sing-box version | Status    | Template                                                   |
+|------------------|-----------|------------------------------------------------------------|
+| 1.14             | Default   | [View template](./src/config/templates/sing-box-1.14.json) |
+| 1.13             | Available | [View template](./src/config/templates/sing-box-1.13.json) |
 
 ### Creating a Configuration Template
 

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added a sing-box 1.14 configuration template with the official JSON Schema reference.
 - Added a clean task for removing generated build artifacts.
 - Added versioned sing-box configuration templates with an explicit default selector and user documentation.
 - Added runtime validation for remote configuration templates.
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated the default configuration template to target sing-box 1.14.
 - Grouped formatting, linting, type checking, and tests under consistent Deno check tasks.
 
 ### Fixed
