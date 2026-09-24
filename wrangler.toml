@@ -1,0 +1,32 @@
+name = "v2sing"
+main = "dist/worker.js"
+compatibility_date = "2024-01-01"
+
+# Cloudflare Workers configuration for v2sing
+# This file is used for deploying to Cloudflare Workers using Wrangler
+
+# Uncomment and configure the following for production deployment:
+# account_id = "YOUR_CLOUDFLARE_ACCOUNT_ID"
+# zone_id = "YOUR_ZONE_ID" # Optional: for zone-specific deployment
+
+# Route configuration (optional)
+# routes = ["https://your-domain.com/*"]
+
+# KV namespace bindings (if needed for caching)
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "your-kv-namespace-id"
+
+# Variables (if needed)
+# [vars]
+# ENVIRONMENT = "production"
+
+# Build configuration
+[build]
+command = "deno task build"
+watch = { pattern = "**/*.ts", command = "deno task build" }
+
+# Build upload configuration
+[build.upload]
+format = "modules"
+main = "./dist/worker.js"

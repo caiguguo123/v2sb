@@ -1,0 +1,72 @@
+name: "Cloudflare Workers Deploy"
+
+on:
+  push:
+    branches: ["master"]
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        required: true
+        default: "production"
+        type: choice
+        options:
+          - production
+          - staging
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: "Build Worker"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install dependencies
+        run: deno cache --reload **/*.ts
+
+      - name: Build project
+        run: deno task build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2sing-worker
+          path: dist/
+
+  deploy:
+    name: "Deploy to Cloudflare"
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: v2sing-worker
+          path: dist/
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Deploy to Cloudflare Workers
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          cd dist
+          # Rename worker.js to match wrangler.toml main field
+          cp worker.js index.js
+          # Deploy using wrangler
+          wrangler deploy --name v2sing --compatibility-date 2024-01-01
