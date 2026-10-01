@@ -62,8 +62,8 @@ jobs:
 
       - name: Deploy to Cloudflare Workers
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ cfat_u83qFOpmChO3ItaRwxTz4LlZlLYcv0I6mWzy4cDi23b59df3 }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ 648d3ef5dfd8c4da48c30e3b1483b8c8 }}
         run: |
           cd dist
           # Rename worker.js to match wrangler.toml main field
