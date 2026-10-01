@@ -66,7 +66,5 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ 648d3ef5dfd8c4da48c30e3b1483b8c8 }}
         run: |
           cd dist
-          # Rename worker.js to match wrangler.toml main field
-          cp worker.js index.js
-          # Deploy using wrangler
-          wrangler deploy --name v2sing --compatibility-date 2024-01-01
+          # 部署时使用 wrangler.toml 配置
+          wrangler deploy --config ../wrangler.toml
